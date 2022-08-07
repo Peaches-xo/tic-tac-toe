@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Permanent+Marker&family=Square+Peg&display=swap');
+
+
+
+html{
+    min-height: 100vh;
+    /* font-family: 'Homemade Apple', cursive; */
+    font-family: 'Permanent Marker', cursive;
+    /* font-family: 'Square Peg', cursive; */
+    font-size: 4.5rem;
+    color: rgb(61, 59, 59)
+}
+
+.gameBoard{
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    border: solid 2px rgb(242, 237, 238);
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-areas: 
+    "top-left top-middle top-right"
+    "middle-left middle-middle middle-right"
+    "bottom-left bottom-middle bottom-right"; */
+    z-index: 1
+}
+
+.gameBoard > div{
+    outline: solid 1px rgb(255, 255, 255);
+    z-index: 2;
+    background-color: lavenderblush;
+}
