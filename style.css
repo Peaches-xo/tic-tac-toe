@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Permanent+Marker&family=Square+Peg&display=swap');
 
-
+:root {
+    --color-background: #F5CAC3;
+    --color-background-fade: #F5CAC300;
+    --color-browser: #84A59D;
+    --color-browser-alt: #C4D4D0;
+    --color-page: #F7EDE2;
+    --color-element: #C6CDD2;
+    --color-footer: #C794BB;
+}
 
 html{
     min-height: 100vh;
@@ -30,4 +38,13 @@ html{
     outline: solid 1px rgb(255, 255, 255);
     z-index: 2;
     background-color: lavenderblush;
+    position: relative;
+}
+
+
+.nav{
+    width: 1000px;
+    height: 100px;
+    background-color: pink;
+    border: solid 2px orange;
 }
