@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Permanent+Marker&family=Square+Peg&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Modak");
 
 :root {
     --color-background: #F5CAC3;
@@ -10,20 +11,63 @@
     --color-footer: #C794BB;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html{
     min-height: 100vh;
     /* font-family: 'Homemade Apple', cursive; */
-    font-family: 'Permanent Marker', cursive;
     /* font-family: 'Square Peg', cursive; */
-    font-size: 4.5rem;
-    color: rgb(61, 59, 59)
+    font-size: 4rem;
+    color: rgb(61, 59, 59);
+    text-align: center;
+    background-color: var(--color-background);
+    background-image: url("images/neon-green-gum-gradient.png");
+    background-size: cover;
 }
 
+
+.text {
+    height: 200px;
+    display: inline-block;
+    margin-top: 20px;
+    padding-top: 30px;
+    font-size: 2rem;
+    line-height: 84%;
+    font-family: Modak;
+    padding-left: 7px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+   
+    text-shadow: 7px 7px 10px #d2d2d22e;
+
+
+}
+.text-1 {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='200px' height='200px' viewBox='0 0 400 400'%3e%3cdefs%3e%3cfilter id='filter' width='400px' height='400px' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3e%3cfeFlood flood-color='%23f5576c' flood-opacity='1' x='0' y='0' width='250px' height='250px' result='flood3'%3e%3c/feFlood%3e%3cfeFlood flood-color='%23f093fb' flood-opacity='1' x='150px' y='150px' width='250px' height='250px' result='flood4'%3e%3c/feFlood%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood3' edgeMode='none' result='blur1'%3e%3c/feGaussianBlur%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood4' edgeMode='none' result='blur2'%3e%3c/feGaussianBlur%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur2' in2='SourceGraphic' result='blend5'%3e%3c/feBlend%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur1' in2='blend5' result='blend6'%3e%3c/feBlend%3e%3c/filter%3e%3c/defs%3e%3crect width='400' height='400' x='0' y='0' fill='%23fee140' filter='url(%23filter)'%3e%3c/rect%3e%3c/svg%3e");
+}
+.text-2 {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='200px' height='200px' viewBox='0 0 400 400'%3e%3cdefs%3e%3cfilter id='filter' width='400px' height='400px' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3e%3cfeFlood flood-color='%238fd3f4' flood-opacity='1' x='0' y='0' width='150px' height='150px' result='flood3'%3e%3c/feFlood%3e%3cfeFlood flood-color='%2396e6a1' flood-opacity='1' x='150px' y='150px' width='250px' height='250px' result='flood4'%3e%3c/feFlood%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood3' edgeMode='none' result='blur1'%3e%3c/feGaussianBlur%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood4' edgeMode='none' result='blur2'%3e%3c/feGaussianBlur%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur2' in2='SourceGraphic' result='blend5'%3e%3c/feBlend%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur1' in2='blend5' result='blend6'%3e%3c/feBlend%3e%3c/filter%3e%3c/defs%3e%3crect width='400' height='400' x='0' y='0' fill='%23d4fc79' filter='url(%23filter)'%3e%3c/rect%3e%3c/svg%3e");
+}
+.text-3 {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='200px' height='200px' viewBox='0 0 400 400'%3e%3cdefs%3e%3cfilter id='filter' width='400px' height='400px' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3e%3cfeFlood flood-color='%23cd9cf2' flood-opacity='1' x='0' y='0' width='150px' height='150px' result='flood3'%3e%3c/feFlood%3e%3cfeFlood flood-color='%23c2e9fb' flood-opacity='1' x='150px' y='150px' width='150px' height='250px' result='flood4'%3e%3c/feFlood%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood3' edgeMode='none' result='blur1'%3e%3c/feGaussianBlur%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood4' edgeMode='none' result='blur2'%3e%3c/feGaussianBlur%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur2' in2='SourceGraphic' result='blend5'%3e%3c/feBlend%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur1' in2='blend5' result='blend6'%3e%3c/feBlend%3e%3c/filter%3e%3c/defs%3e%3crect width='400' height='400' x='0' y='0' fill='%2366a6ff' filter='url(%23filter)'%3e%3c/rect%3e%3c/svg%3e");
+}
+
+
 .gameBoard{
+    font-family: 'Permanent Marker', cursive;
     width: 500px;
     height: 500px;
-    background-color: transparent;
-    border: solid 2px rgb(242, 237, 238);
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color:  rgba(242, 237, 238, 0.3);
+    outline: solid 0.5px  rgba(242, 237, 238, 0.5);
+
+
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
@@ -31,20 +75,28 @@ html{
     "top-left top-middle top-right"
     "middle-left middle-middle middle-right"
     "bottom-left bottom-middle bottom-right"; */
-    z-index: 1
-}
-
-.gameBoard > div{
-    outline: solid 1px rgb(255, 255, 255);
-    z-index: 2;
-    background-color: lavenderblush;
-    position: relative;
+    z-index: 0
 }
 
 
-.nav{
-    width: 1000px;
-    height: 100px;
-    background-color: pink;
-    border: solid 2px orange;
+footer a{
+    font-family: monospace;
+    text-decoration: none;
+    font-size: 0.4em;
+    color: rgba(0,0,0,.1);
+  
+    background: url("images/neon-green-lizard-gradient.png");
+        /* background: url("images/neon-envious-pastel-gradient.png"); */
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+ 
+ 
 }
+
+a:hover, .text:hover{
+    filter: drop-shadow(0px 0px 5px #FFFFFF);
+    transition: .3s;
+}
+
+
+
