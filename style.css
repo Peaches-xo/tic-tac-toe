@@ -86,9 +86,19 @@ footer a{
     text-decoration: none;
     font-size: 0.4em;
     color: rgba(0,0,0,.1);
-    background: url("images/neon-green-lizard-gradient.png");
+    background: url("images/gradient-bgs/neon-distilled-moss-gradient.png");
+    /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
+    /* background: url("images/gradient-bgs/neon-reef-refractions-gradient.png"); */
+
+    /* background: url("images/gradient-bgs/neon-cactus-water-gradient.png"); */
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+    display: flex;
+    padding: 20px;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 a:hover, .text:hover{

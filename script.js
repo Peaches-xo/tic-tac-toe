@@ -3,57 +3,26 @@
 
 
 let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
-console.log(nodeList);
-
+let gameboardArr = [];
 
 for (let div of nodeList){
     div.addEventListener('click', function(e){
-        console.log(e.target.dataset);
-        e.target.textContent =e.target.dataset.index;
-    })
+        // console.log(e.target);
+
+        player1.yourTurn() ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
+
+     
+
+        // e.target.textContent = e.target.dataset.index; //add number to div
+        gameboardArr[e.target.dataset.index] = e.target.dataset.index; //add marker in array at correct spot
+        console.log(gameboardArr);
+
+
+        //remove event listeners? here or elsewhere
+    });
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const gameBoard = document.querySelector(".gameBoard");
-
-// const player1 = new Player(true);
-// const player2 = new Player(false);
-
-// gameBoard.addEventListener('click', ()=>{
-
-// if (player1.turn){
-//     gameBoard.textContent = "X";
-//     player1.toggleTurn();
-//     player2.toggleTurn();
-// } else if (player2.turn){
-//     gameBoard.textContent = "O";
-//     player1.toggleTurn();
-//     player2.toggleTurn();
-// }
-//     });
 
 
 
@@ -99,6 +68,24 @@ for (let div of nodeList){
 
             //Player2 Object
                 // name, marker, turn
+
+const Player = (name, marker, turn) => {
+   
+   
+    const getName = () => name; 
+    const getMarker = () => marker;
+    const yourTurn = () => turn; //not sure bout this bit
+    
+    const turnToggle = (turn) => {
+        return turn = !turn;
+    }
+    return {getName, getMarker, yourTurn, turnToggle};
+};
+
+const player1 = Player('alfred', "X", true);
+const player2 = Player('bart', "O", false);
+
+
     
     
     // Object displayController MODULE
