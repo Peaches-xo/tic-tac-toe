@@ -4,26 +4,24 @@ let nodeList = document.querySelectorAll('div[data-index]'); //node list of all 
 let gameboardArr = [];
 
 for (let div of nodeList){
+
     div.addEventListener('click', function(e){
-            // console.log(e.target);
-            // e.target.textContent = e.target.dataset.index; //add number to div
+
         addMarkToBoard(e);
         addMarkToArray(e);
-        toggleTurn();
-       
-        
-
-        //remove event listeners? here or elsewhere
+        checkWinner(gameboardArr);
     });
-}
+};
+
 
 function addMarkToBoard(e){
-    // player1.yourTurn() ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
-    player1.yourTurn ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
+    if (e.target.textContent ==  ""){
+        e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
+        toggleTurn();
+    };
 }
 
 function addMarkToArray(e){
-    // gameboardArr[e.target.dataset.index] = e.target.dataset.index; //add marker in array at correct spot
     gameboardArr[e.target.dataset.index] = e.target.textContent; //add marker in array at correct spot
     console.log(gameboardArr);
 }
@@ -38,6 +36,48 @@ function toggleTurn(){
     }
 };
 
+function checkWinner(arr){
+    if ( //across rows
+        arr[0] === 'X' && arr[1] === 'X' && arr[2] === 'X' ||
+        arr[3] == 'X' && arr[4] == 'X' && arr[5] == 'X' ||
+        arr[6] == 'X' && arr[7] == 'X' && arr[8] == 'X' ||
+        //down columns
+        arr[0] === 'X' && arr[3] === 'X' && arr[6] === 'X' ||
+        arr[1] == 'X' && arr[4] == 'X' && arr[7] == 'X' ||
+        arr[2] == 'X' && arr[5] == 'X' && arr[8] == 'X' ||
+        //diagonals
+        arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
+        arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
+                console.log ("X is the winner");
+    } else if 
+        ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
+        arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
+        arr[6] == 'O' && arr[7] == 'O' && arr[8] == 'O' ||
+        //down columns
+        arr[0] === 'O' && arr[3] === 'O' && arr[6] === 'O' ||
+        arr[1] == 'O' && arr[4] == 'O' && arr[7] == 'O' ||
+        arr[2] == 'O' && arr[5] == 'O' && arr[8] == 'O' ||
+        //diagonals
+        arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
+        arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
+                console.log ("O is the winner");
+        }
+};
+
+
+
+    // let winningConditions = [
+    //     gameboardArr[0] === 'X' && gameboardArr[1] === 'X' && gameboardArr[2] === 'X',
+    //     gameboardArr[3] == 'X' && gameboardArr[4] == 'X' && gameboardArr[5] == 'X',
+    //     gameboardArr[6] == 'X' && gameboardArr[7] == 'X' && gameboardArr[8] == 'X',
+    //   ];
+
+
+
+
+// function removeListener(e){
+//     console.log("from removeListener:" + e.target.dataset.index);
+// }
 
 
 
@@ -48,10 +88,7 @@ function toggleTurn(){
 // var GameBoard = (function () {
 
 //        //needs to contain gameboard array
-//        let gameboardArray = 
-//                 ["X","X","X",
-//                 "O","O","O",
-//                 "X","X","X"];
+//        let gameboardArray = [];
 
 //         var _privateMethod = function() {
 //             console.log("privateMethod called");
@@ -77,25 +114,18 @@ function toggleTurn(){
 
     //Gameboard Object MODULE
         //store gameboard as an array
-        
 
-        //FACTORIES
-            //Player1 Object
-                // name, marker, turn
-            //Player2 Object
-                // name, marker, turn
-
+//Player FACTORIES
 const Player = (name, marker, turn) => {
     const getName = () => name; 
     const getMarker = () => marker;
-    const yourTurn = turn; //not sure bout this bit
+    const yourTurn = turn; 
     
-
     return {getName, getMarker, yourTurn};
 };
 
-const player1 = Player('alfred', "X", true);
-const player2 = Player('bart', "O", false);
+const player1 = Player('killerMike', "X", true);
+const player2 = Player('El-P', "O", false);
 
 
     

@@ -11,7 +11,8 @@
     --color-footer: #C794BB;
 }
 
-* {
+/* ********************************************* */
+*, *::before, *::after{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,15 +20,9 @@
 
 html{
     min-height: 100vh;
-    /* font-family: 'Homemade Apple', cursive; */
-    /* font-family: 'Square Peg', cursive; */
-    font-size: 4rem;
-    /* color: rgb(61, 59, 59); */
-    color: whitesmoke;
-    text-shadow:7px 7px 10px #c794bbbe;
-
+    font-size: 1rem;
     text-align: center;
-    /* background-color: var(--color-background); */
+    background-color: var(--color-background);
     background-image: url("images/neon-green-gum-gradient.png");
     background-size: cover;
 }
@@ -38,14 +33,17 @@ html{
     display: inline-block;
     margin-top: 20px;
     padding-top: 30px;
-    font-size: 2rem;
+    font-size: 8rem;
     line-height: 84%;
     font-family: Modak;
+
     padding-left: 7px;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    text-shadow: 7px 7px 10px #d2d2d22e;
+    text-shadow: none;
+
+
 }
 .text-1 {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='200px' height='200px' viewBox='0 0 400 400'%3e%3cdefs%3e%3cfilter id='filter' width='400px' height='400px' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3e%3cfeFlood flood-color='%23f5576c' flood-opacity='1' x='0' y='0' width='250px' height='250px' result='flood3'%3e%3c/feFlood%3e%3cfeFlood flood-color='%23f093fb' flood-opacity='1' x='150px' y='150px' width='250px' height='250px' result='flood4'%3e%3c/feFlood%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood3' edgeMode='none' result='blur1'%3e%3c/feGaussianBlur%3e%3cfeGaussianBlur stdDeviation='50 50' x='0%25' y='0%25' width='100%25' height='100%25' in='flood4' edgeMode='none' result='blur2'%3e%3c/feGaussianBlur%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur2' in2='SourceGraphic' result='blend5'%3e%3c/feBlend%3e%3cfeBlend mode='normal' x='0%25' y='0%25' width='100%25' height='100%25' in='blur1' in2='blend5' result='blend6'%3e%3c/feBlend%3e%3c/filter%3e%3c/defs%3e%3crect width='400' height='400' x='0' y='0' fill='%23fee140' filter='url(%23filter)'%3e%3c/rect%3e%3c/svg%3e");
@@ -59,7 +57,11 @@ html{
 
 .gameBoard{
     font-family: 'Permanent Marker', cursive;
-    font-size: 1.5rem;
+        /* font-family: 'Homemade Apple', cursive; */
+    /* font-family: 'Square Peg', cursive; */
+    font-size: 6rem;
+    color: whitesmoke;
+    text-shadow:7px 7px 10px #c794bbbe;
     width: 500px;
     height: 500px;
     margin: 0 auto;
@@ -85,7 +87,7 @@ footer a{
      font-family: 'Silkscreen', cursive;
     text-decoration: none;
     text-shadow: none;
-    font-size: 0.4em;
+    font-size: 2rem;
     color: rgba(0,0,0,.1);
     background: url("images/gradient-bgs/neon-distilled-moss-gradient.png");
     /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
@@ -100,6 +102,10 @@ footer a{
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.img_git{
+    width: 32px;
 }
 
 a:hover, .text:hover{
