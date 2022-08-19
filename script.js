@@ -1,26 +1,43 @@
 
 //loop through divs that are children of gameboard, add event listener
-
-
 let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
 let gameboardArr = [];
 
 for (let div of nodeList){
     div.addEventListener('click', function(e){
-        // console.log(e.target);
-
-        player1.yourTurn() ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
-
-     
-
-        // e.target.textContent = e.target.dataset.index; //add number to div
-        gameboardArr[e.target.dataset.index] = e.target.dataset.index; //add marker in array at correct spot
-        console.log(gameboardArr);
-
+            // console.log(e.target);
+            // e.target.textContent = e.target.dataset.index; //add number to div
+        addMarkToBoard(e);
+        addMarkToArray(e);
+        toggleTurn();
+       
+        
 
         //remove event listeners? here or elsewhere
     });
 }
+
+function addMarkToBoard(e){
+    // player1.yourTurn() ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
+    player1.yourTurn ? e.target.textContent = player1.getMarker() : e.target.textContent = player2.getMarker();
+}
+
+function addMarkToArray(e){
+    // gameboardArr[e.target.dataset.index] = e.target.dataset.index; //add marker in array at correct spot
+    gameboardArr[e.target.dataset.index] = e.target.textContent; //add marker in array at correct spot
+    console.log(gameboardArr);
+}
+
+function toggleTurn(){
+    if (player1.yourTurn === true) {
+        player1.yourTurn = false;
+         player2.yourTurn = true;
+    } else if (player2.yourTurn === true){
+         player1.yourTurn = true;
+         player2.yourTurn = false;
+    }
+};
+
 
 
 
@@ -65,21 +82,16 @@ for (let div of nodeList){
         //FACTORIES
             //Player1 Object
                 // name, marker, turn
-
             //Player2 Object
                 // name, marker, turn
 
 const Player = (name, marker, turn) => {
-   
-   
     const getName = () => name; 
     const getMarker = () => marker;
-    const yourTurn = () => turn; //not sure bout this bit
+    const yourTurn = turn; //not sure bout this bit
     
-    const turnToggle = (turn) => {
-        return turn = !turn;
-    }
-    return {getName, getMarker, yourTurn, turnToggle};
+
+    return {getName, getMarker, yourTurn};
 };
 
 const player1 = Player('alfred', "X", true);

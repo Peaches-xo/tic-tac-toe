@@ -22,9 +22,12 @@ html{
     /* font-family: 'Homemade Apple', cursive; */
     /* font-family: 'Square Peg', cursive; */
     font-size: 4rem;
-    color: rgb(61, 59, 59);
+    /* color: rgb(61, 59, 59); */
+    color: whitesmoke;
+    text-shadow:7px 7px 10px #c794bbbe;
+
     text-align: center;
-    background-color: var(--color-background);
+    /* background-color: var(--color-background); */
     background-image: url("images/neon-green-gum-gradient.png");
     background-size: cover;
 }
@@ -38,7 +41,6 @@ html{
     font-size: 2rem;
     line-height: 84%;
     font-family: Modak;
-  
     padding-left: 7px;
     background-clip: text;
     -webkit-background-clip: text;
@@ -76,21 +78,20 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
-  
 }
 
 footer a{
     /* font-family: 'DynaPuff', cursive; */
      font-family: 'Silkscreen', cursive;
-
     text-decoration: none;
+    text-shadow: none;
     font-size: 0.4em;
     color: rgba(0,0,0,.1);
     background: url("images/gradient-bgs/neon-distilled-moss-gradient.png");
     /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
     /* background: url("images/gradient-bgs/neon-reef-refractions-gradient.png"); */
-
     /* background: url("images/gradient-bgs/neon-cactus-water-gradient.png"); */
+    /* dont forget to move gradients folder out of image folder & leave images I want */
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     display: flex;
