@@ -113,5 +113,8 @@ a:hover, .text:hover{
     transition: .3s;
 }
 
+div[data-index]:hover{
+    background-color:  rgba(242, 237, 238, 0.1);
+}
 
 

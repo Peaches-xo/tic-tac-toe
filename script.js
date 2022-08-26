@@ -1,40 +1,96 @@
+// THE ODIN PROJECT - TIC TAC TOE JS FILE
 
-//loop through divs that are children of gameboard, add event listener
-let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
-let gameboardArr = [];
-
-for (let div of nodeList){
-
-    div.addEventListener('click', function(e){
-
-        addMarkToBoard(e);
-        addMarkToArray(e);
-        checkWinner(gameboardArr);
-    });
-};
-
-
-function addMarkToBoard(e){
-    if (e.target.textContent ==  ""){
-        e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
-        toggleTurn();
+    //Player FACTORIES
+    const Player = (name, marker, turn) => {
+        const getName = () => name; 
+        const getMarker = () => marker;
+        const yourTurn = turn; 
+        return {getName, getMarker, yourTurn};
     };
-}
 
-function addMarkToArray(e){
-    gameboardArr[e.target.dataset.index] = e.target.textContent; //add marker in array at correct spot
-    console.log(gameboardArr);
-}
+    const player1 = Player('killerMike', "X", true);
+    const player2 = Player('El-P', "O", false);
 
-function toggleTurn(){
-    if (player1.yourTurn === true) {
-        player1.yourTurn = false;
-         player2.yourTurn = true;
-    } else if (player2.yourTurn === true){
-         player1.yourTurn = true;
-         player2.yourTurn = false;
-    }
-};
+
+let gameBoardModule = (function () { //LOGIC & DATA
+    'use strict';
+
+    let gameBoardArr = Array(9);
+
+    let _privateMethod = function() {
+        let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
+      
+        for (let div of nodeList){
+            div.addEventListener('click', (e)=>{
+                _addMarkToArray(e); //update array (logic)
+                console.log(gameBoardArr);
+                displayController.publicMethod(e); //display mark on board from array (ui)
+                _toggleTurn();// (logic)
+            });
+        };
+    };
+
+    let _addMarkToArray = function(e){  
+        if (e.target.textContent ==  ""){ //if div empty...
+            //...add currentplayers marker to array
+            gameBoardArr[e.target.dataset.index] = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
+          };
+    };
+
+    let _toggleTurn = function(){ //simplify this
+        if (player1.yourTurn === true) {
+            player1.yourTurn = false;
+                player2.yourTurn = true;
+        } else if (player2.yourTurn === true){
+                player1.yourTurn = true;
+                player2.yourTurn = false;
+        }
+    };
+
+
+
+        let publicMethod = function(){
+            _privateMethod();
+        };
+
+        return {
+            publicMethod: publicMethod
+        };
+     })(); //<pass in any parameters here
+
+     gameBoardModule.publicMethod();
+
+
+     let displayController = (function () { //UI AND DOM
+        'use strict';
+
+        let _addMarkToBoard = function(e){ //change this to render from array
+            if (e.target.textContent ==  ""){
+                e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
+                // toggleTurn();
+            };
+        };
+
+             var publicMethod = function(e){
+                 _addMarkToBoard(e);
+            };
+
+    
+             return {
+                 publicMethod: publicMethod,
+
+             };
+         })();
+
+
+
+
+
+
+
+
+
+
 
 function checkWinner(arr){
     if ( //across rows
@@ -48,9 +104,9 @@ function checkWinner(arr){
         //diagonals
         arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
         arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
-                console.log ("X is the winner");
-    } else if 
-        ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
+            displayWinner(player1.getName());
+                //call reset screen & reset array
+    } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
         arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
         arr[6] == 'O' && arr[7] == 'O' && arr[8] == 'O' ||
         //down columns
@@ -60,18 +116,36 @@ function checkWinner(arr){
         //diagonals
         arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
         arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
-                console.log ("O is the winner");
-        }
+                displayWinner(player2.getName());
+        };
+
+};
+
+function displayWinner(player){
+    console.log (`${player} is the winner`);
+    setTimeout(resetGame, 1000);
+
+}
+
+function resetGame(){
+    gameBoardArr = [];
+    for (let div of nodeList){
+        div.textContent = "";
+    };
 };
 
 
 
     // let winningConditions = [
-    //     gameboardArr[0] === 'X' && gameboardArr[1] === 'X' && gameboardArr[2] === 'X',
-    //     gameboardArr[3] == 'X' && gameboardArr[4] == 'X' && gameboardArr[5] == 'X',
-    //     gameboardArr[6] == 'X' && gameboardArr[7] == 'X' && gameboardArr[8] == 'X',
-    //   ];
+    //     [0,1,2],
+    //     [3,4,5],
+    //     [6,7,8],
+    //     [0,4,8],
+    //     [2,4,6]
+    // ];
 
+    // let [a,b,c] = [gameboardArr[0], gameboardArr[1], gameboardArr[2]];
+    // console.log([a,b,c]);
 
 
 
@@ -79,62 +153,7 @@ function checkWinner(arr){
 //     console.log("from removeListener:" + e.target.dataset.index);
 // }
 
-
-
-
-
-
-// //define module
-// var GameBoard = (function () {
-
-//        //needs to contain gameboard array
-//        let gameboardArray = [];
-
-//         var _privateMethod = function() {
-//             console.log("privateMethod called");
-   
-//         };
-//         var publicMethod = function(){
-//             _privateMethod();
-//             console.log("publicMethod called");
-       
-//         };
-//         var anotherPublicMethod = function(){
-//             console.log("anotherPublicMethod called");
-           
-//         };
-
-//         return {
-//             publicMethod: publicMethod,
-//             anotherPublicMethod: anotherPublicMethod
-//         };
-//     })();
-
     // **********************************************
-
-    //Gameboard Object MODULE
-        //store gameboard as an array
-
-//Player FACTORIES
-const Player = (name, marker, turn) => {
-    const getName = () => name; 
-    const getMarker = () => marker;
-    const yourTurn = turn; 
-    
-    return {getName, getMarker, yourTurn};
-};
-
-const player1 = Player('killerMike', "X", true);
-const player2 = Player('El-P', "O", false);
-
-
-    
-    
-    // Object displayController MODULE
-
-     //Object gameController Game Control Object  MODULE
-
-
 
     //FUNCTIONS TO ADD
         // - render contents of gameboard array to page
@@ -167,5 +186,22 @@ const player2 = Player('El-P', "O", false);
 
 
 
+// function clickMeButton() {
 
+    // var choices = ["Rock", "Paper", "Scissors"];
+    // function getComputerChoice(choices) {
+    //     // console.log(choices[Math.floor(Math.random()*choices.length)]);
+    //     return choices[Math.floor(Math.random()*choices.length)];
+    // }
+    
+    // return getComputerChoice(choices);
+    // }
 
+// function clickMeButton(){
+//     getCompChoices();
+// };
+
+// function getCompChoices(){
+//     var choices = ["Rock", "Paper", "Scissors"];
+//     return choices[Math.floor(Math.random()*choices.length)];
+// }
