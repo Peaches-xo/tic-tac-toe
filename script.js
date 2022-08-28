@@ -23,8 +23,9 @@ let gameBoardModule = (function () { //LOGIC & DATA
         for (let div of nodeList){
             div.addEventListener('click', (e)=>{
                 _addMarkToArray(e); //update array (logic)
-                console.log(gameBoardArr);
+               
                 displayController.publicMethod(e); //display mark on board from array (ui)
+                _checkWinner(gameBoardArr);
                 _toggleTurn();// (logic)
             });
         };
@@ -46,6 +47,46 @@ let gameBoardModule = (function () { //LOGIC & DATA
                 player2.yourTurn = false;
         }
     };
+
+    let _checkWinner = function(arr){
+        if ( //across rows
+            arr[0] === 'X' && arr[1] === 'X' && arr[2] === 'X' ||
+            arr[3] == 'X' && arr[4] == 'X' && arr[5] == 'X' ||
+            arr[6] == 'X' && arr[7] == 'X' && arr[8] == 'X' ||
+            //down columns
+            arr[0] === 'X' && arr[3] === 'X' && arr[6] === 'X' ||
+            arr[1] == 'X' && arr[4] == 'X' && arr[7] == 'X' ||
+            arr[2] == 'X' && arr[5] == 'X' && arr[8] == 'X' ||
+            //diagonals
+            arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
+            arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
+                displayWinner(player1.getName());
+                    //call reset screen & reset array
+        } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
+            arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
+            arr[6] == 'O' && arr[7] == 'O' && arr[8] == 'O' ||
+            //down columns
+            arr[0] === 'O' && arr[3] === 'O' && arr[6] === 'O' ||
+            arr[1] == 'O' && arr[4] == 'O' && arr[7] == 'O' ||
+            arr[2] == 'O' && arr[5] == 'O' && arr[8] == 'O' ||
+            //diagonals
+            arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
+            arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
+                    displayWinner(player2.getName());
+                    //call reset screen & reset array
+            };
+
+};
+
+function displayWinner(player){
+    console.log (`${player} is the winner`);
+    setTimeout(resetGame, 1000);
+
+};
+
+
+
+
 
 
 
@@ -92,40 +133,6 @@ let gameBoardModule = (function () { //LOGIC & DATA
 
 
 
-function checkWinner(arr){
-    if ( //across rows
-        arr[0] === 'X' && arr[1] === 'X' && arr[2] === 'X' ||
-        arr[3] == 'X' && arr[4] == 'X' && arr[5] == 'X' ||
-        arr[6] == 'X' && arr[7] == 'X' && arr[8] == 'X' ||
-        //down columns
-        arr[0] === 'X' && arr[3] === 'X' && arr[6] === 'X' ||
-        arr[1] == 'X' && arr[4] == 'X' && arr[7] == 'X' ||
-        arr[2] == 'X' && arr[5] == 'X' && arr[8] == 'X' ||
-        //diagonals
-        arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
-        arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
-            displayWinner(player1.getName());
-                //call reset screen & reset array
-    } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
-        arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
-        arr[6] == 'O' && arr[7] == 'O' && arr[8] == 'O' ||
-        //down columns
-        arr[0] === 'O' && arr[3] === 'O' && arr[6] === 'O' ||
-        arr[1] == 'O' && arr[4] == 'O' && arr[7] == 'O' ||
-        arr[2] == 'O' && arr[5] == 'O' && arr[8] == 'O' ||
-        //diagonals
-        arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
-        arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
-                displayWinner(player2.getName());
-        };
-
-};
-
-function displayWinner(player){
-    console.log (`${player} is the winner`);
-    setTimeout(resetGame, 1000);
-
-}
 
 function resetGame(){
     gameBoardArr = [];

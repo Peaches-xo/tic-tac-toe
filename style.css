@@ -98,7 +98,7 @@ footer a{
     -webkit-background-clip: text;
     display: flex;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -108,7 +108,8 @@ footer a{
     width: 32px;
 }
 
-a:hover, .text:hover{
+ a:hover, .text:hover, .div_names:hover{ /*change to hover each child div only */
+    
     filter: drop-shadow(0px 0px 5px #FFFFFF);
     transition: .3s;
 }
@@ -117,4 +118,24 @@ div[data-index]:hover{
     background-color:  rgba(242, 237, 238, 0.1);
 }
 
+
+.div_names{
+    display:flex;
+    justify-content: space-around;
+    
+    padding: 10px;
+    margin: 0px 50px 10px;
+    
+    font-family: 'Silkscreen', cursive;
+    font-size: 1.5rem;
+
+
+    /* background: url("images/gradient-bgs/neon-distilled-moss-gradient.png"); */
+    /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
+    background: url("images/gradient-bgs/neon-reef-refractions-gradient.png");
+    /* background: url("images/gradient-bgs/neon-cactus-water-gradient.png"); */
+    /* dont forget to move gradients folder out of image folder & leave images I want */
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
 
