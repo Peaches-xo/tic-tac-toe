@@ -12,12 +12,29 @@
     const player2 = Player('El-P', "O", false);
 
 
+let gameModule = (function(){ //controls flow of game
+
+    // PLAYERS
+
+    // BOARD 
+
+    // DISPLAY UI
+
+
+    return;
+})();
+
+
+
+
+
 let gameBoardModule = (function () { //LOGIC & DATA
     'use strict';
 
     let gameBoardArr = Array(9);
 
-    let _privateMethod = function() {
+    let _startGame = function() {
+        console.log("game started");
         let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
       
         for (let div of nodeList){
@@ -60,7 +77,7 @@ let gameBoardModule = (function () { //LOGIC & DATA
             //diagonals
             arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
             arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
-                displayWinner(player1.getName());
+                _displayWinner(player1.getName());
                     //call reset screen & reset array
         } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
             arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
@@ -72,36 +89,48 @@ let gameBoardModule = (function () { //LOGIC & DATA
             //diagonals
             arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
             arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
-                    displayWinner(player2.getName());
+                    _displayWinner(player2.getName());
                     //call reset screen & reset array
             };
+    };
 
-};
+    let _displayWinner = function (player){
+        console.log (`${player} is the winner`);
+        //call method in displayController to display winner on screen
+        
+        setTimeout(_resetGame, 1000);
 
-function displayWinner(player){
-    console.log (`${player} is the winner`);
-    setTimeout(resetGame, 1000);
+    };
+  
+    let _resetGame = function(e){
+        gameBoardArr = Array(9);
+        console.log(gameBoardArr);
 
-};
+        // for (const item of gameBoardArr){ 
+        // };
 
+        //call method in displayController to rerender array
+        // for (let div of nodeList){
+        //     div.textContent = "";
+        // };
 
+        //call method in displayController to add New Game button
 
+        
+    };
 
+    let publicMethod = function(){
+        _startGame();
+    };
 
+    return {
+        publicMethod: publicMethod
+    };
+})(); //<pass in any parameters here
 
+   
 
-        let publicMethod = function(){
-            _privateMethod();
-        };
-
-        return {
-            publicMethod: publicMethod
-        };
-     })(); //<pass in any parameters here
-
-     gameBoardModule.publicMethod();
-
-
+// DISPLAY CONTROLLER *********************************
      let displayController = (function () { //UI AND DOM
         'use strict';
 
@@ -111,6 +140,32 @@ function displayWinner(player){
                 // toggleTurn();
             };
         };
+
+        let startBtn = document.querySelector('.btn_start');
+
+        startBtn.addEventListener('click', (e)=>{
+
+            if(e.target.textContent == 'Lets Go'){
+                gameBoardModule.publicMethod();
+                _btnToggle();
+            } else if (e.target.textContent == 'Reset Game'){
+                console.log('game reset');
+                //call reset game fn
+                _btnToggle();
+            }
+                 
+        });
+
+        let _btnToggle = function(){
+            if (startBtn.textContent == 'Lets Go') {
+                startBtn.textContent = 'Reset Game';
+            } else {
+                startBtn.textContent = 'Lets Go';
+            }
+        };
+
+
+
 
              var publicMethod = function(e){
                  _addMarkToBoard(e);
@@ -125,21 +180,6 @@ function displayWinner(player){
 
 
 
-
-
-
-
-
-
-
-
-
-function resetGame(){
-    gameBoardArr = [];
-    for (let div of nodeList){
-        div.textContent = "";
-    };
-};
 
 
 

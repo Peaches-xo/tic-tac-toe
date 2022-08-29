@@ -29,14 +29,12 @@ html{
 
 
  .text { /* TICTACTOE */
-    height: 200px;
+    height: 150px;
     display: inline-block;
-    margin-top: 20px;
     padding-top: 30px;
     font-size: 8rem;
     line-height: 84%;
     font-family: Modak;
-
     padding-left: 7px;
     background-clip: text;
     -webkit-background-clip: text;
@@ -71,7 +69,8 @@ html{
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
-    z-index: 0
+    z-index: 0;
+    
 }
 
 .gameBoard>div{
@@ -98,7 +97,7 @@ footer a{
     -webkit-background-clip: text;
     display: flex;
     padding: 20px;
-    margin-top: 20px;
+
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -107,17 +106,6 @@ footer a{
 .img_git{
     width: 32px;
 }
-
- a:hover, .text:hover, .div_names:hover{ /*change to hover each child div only */
-    
-    filter: drop-shadow(0px 0px 5px #FFFFFF);
-    transition: .3s;
-}
-
-div[data-index]:hover{
-    background-color:  rgba(242, 237, 238, 0.1);
-}
-
 
 .div_names{
     display:flex;
@@ -128,14 +116,55 @@ div[data-index]:hover{
     
     font-family: 'Silkscreen', cursive;
     font-size: 1.5rem;
+}
 
 
-    /* background: url("images/gradient-bgs/neon-distilled-moss-gradient.png"); */
-    /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
-    background: url("images/gradient-bgs/neon-reef-refractions-gradient.png");
-    /* background: url("images/gradient-bgs/neon-cactus-water-gradient.png"); */
+.names_p1, .names_p2{
+     /* background: url("images/gradient-bgs/neon-distilled-moss-gradient.png");
+      background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
+     background: url("images/gradient-bgs/neon-reef-refractions-gradient.png");
+    /*background: url("images/gradient-bgs/neon-cactus-water-gradient.png");  */
+
+    /* background: url("images/gradient-bgs/colourful-venetian-rose-gradient.png"); */
+
+
+
     /* dont forget to move gradients folder out of image folder & leave images I want */
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
 
+
+.btn_start{
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    margin: 15px 0px 0px 0px;
+    width: auto;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    outline: dotted 1px  rgba(242, 237, 238, 0.5);
+    background-color:transparent;
+    box-shadow: 0px 0px 10px pink;
+
+    background: url("images/gradient-bgs/neon-envious-pastel-gradient.png");
+
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+};
+
+
+.btn_start:hover{
+
+}
+
+/* HOVERS */
+a:hover, .text:hover, div.div_names > *:hover, .btn_start:hover { 
+    filter: drop-shadow(0px 0px 5px #FFFFFF);
+    transition: .3s;
+};
+
+
+div[data-index]:hover{
+    background-color:  rgba(242, 237, 238, 0.15);
+}
