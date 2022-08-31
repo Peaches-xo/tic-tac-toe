@@ -25,34 +25,34 @@ let gameModule = (function(){ //controls flow of game
 })();
 
 
-
-
-
 let gameBoardModule = (function () { //LOGIC & DATA
     'use strict';
 
     let gameBoardArr = Array(9);
 
     let _startGame = function() {
-        console.log("game started");
+        
         let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
       
+        //on new game start... 
+        //clear array & rerender board
+        //add event listeners
+
         for (let div of nodeList){
             div.addEventListener('click', (e)=>{
-                _addMarkToArray(e); //update array (logic)
-               
-                displayController.publicMethod(e); //display mark on board from array (ui)
+                _addMarkToArray(e); //1. update array (logic)
+                displayController.publicMethod(e, gameBoardArr); //2. display mark on board from array (ui)
+
                 _checkWinner(gameBoardArr);
                 _toggleTurn();// (logic)
-            });
+            }, {
+                once: true
+              });
         };
     };
 
-    let _addMarkToArray = function(e){  
-        if (e.target.textContent ==  ""){ //if div empty...
-            //...add currentplayers marker to array
-            gameBoardArr[e.target.dataset.index] = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
-          };
+    let _addMarkToArray = function(e){  //= 1. GET DIV INDEX & ADD MARK TO ARRAY AT THAT INDEX
+        gameBoardArr[e.target.dataset.index] = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
     };
 
     let _toggleTurn = function(){ //simplify this
@@ -131,17 +131,41 @@ let gameBoardModule = (function () { //LOGIC & DATA
    
 
 // DISPLAY CONTROLLER *********************************
-     let displayController = (function () { //UI AND DOM
-        'use strict';
+let displayController = (function () { //UI AND DOM
+    'use strict';
 
-        let _addMarkToBoard = function(e){ //change this to render from array
-            if (e.target.textContent ==  ""){
-                e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
-                // toggleTurn();
-            };
+    let _addMarkToBoard = function(e, arr){ // 2. DISPLAY BOARD FROM ARRAY (change this to render from array)
+ 
+        if (e.target.textContent ==  ""){
+            e.target.textContent = arr[e.target.dataset.index];
+            // e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
+
         };
 
-        let startBtn = document.querySelector('.btn_start');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+
+    let startBtn = document.querySelector('.btn_start');
 
         startBtn.addEventListener('click', (e)=>{
 
@@ -156,27 +180,22 @@ let gameBoardModule = (function () { //LOGIC & DATA
                  
         });
 
-        let _btnToggle = function(){
-            if (startBtn.textContent == 'Lets Go') {
-                startBtn.textContent = 'Reset Game';
-            } else {
-                startBtn.textContent = 'Lets Go';
-            }
-        };
+    let _btnToggle = function(){
+        if (startBtn.textContent == 'Lets Go') {
+            startBtn.textContent = 'Reset Game';
+        } else {
+            startBtn.textContent = 'Lets Go';
+        }
+    };
 
-
-
-
-             var publicMethod = function(e){
-                 _addMarkToBoard(e);
-            };
-
+    var publicMethod = function(e, arr){
+        _addMarkToBoard(e, arr);
+    };
     
-             return {
-                 publicMethod: publicMethod,
-
-             };
-         })();
+    return {
+        publicMethod: publicMethod,
+    };
+})();
 
 
 
