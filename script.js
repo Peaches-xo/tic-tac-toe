@@ -13,14 +13,9 @@
 
 
 let gameModule = (function(){ //controls flow of game
-
     // PLAYERS
-
     // BOARD 
-
     // DISPLAY UI
-
-
     return;
 })();
 
@@ -29,25 +24,29 @@ let gameBoardModule = (function () { //LOGIC & DATA
     'use strict';
 
     let gameBoardArr = Array(9);
+    let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
+    let winnerDisplay = document.querySelector('.winnerDisplay');
 
     let _startGame = function() {
-        
-        let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
-      
         //on new game start... 
-        //clear array & rerender board
+        //clear array & rerender board (in reset game button)
         //add event listeners
 
         for (let div of nodeList){
             div.addEventListener('click', (e)=>{
+                
                 _addMarkToArray(e); //1. update array (logic)
                 displayController.publicMethod(e, gameBoardArr); //2. display mark on board from array (ui)
-
-                _checkWinner(gameBoardArr);
-                _toggleTurn();// (logic)
+                let winnerFound = _checkWinner(gameBoardArr); // 3. checks for winner (logic)
+                    if (winnerFound == false){
+                        _toggleTurn();// (logic)
+                    } else {
+                        console.log("winnerFound:" + winnerFound);
+                        //call reset array(logic), clear screen(display), display Winner(display);
+                    }
             }, {
                 once: true
-              });
+            });
         };
     };
 
@@ -65,59 +64,67 @@ let gameBoardModule = (function () { //LOGIC & DATA
         }
     };
 
-    let _checkWinner = function(arr){
-        if ( //across rows
+    let _checkWinner = function(arr){ //3. CHECK WINNER
+        if ( //across rows 
             arr[0] === 'X' && arr[1] === 'X' && arr[2] === 'X' ||
-            arr[3] == 'X' && arr[4] == 'X' && arr[5] == 'X' ||
-            arr[6] == 'X' && arr[7] == 'X' && arr[8] == 'X' ||
+            arr[3] === 'X' && arr[4] === 'X' && arr[5] === 'X' ||
+            arr[6] === 'X' && arr[7] === 'X' && arr[8] === 'X' ||
             //down columns
             arr[0] === 'X' && arr[3] === 'X' && arr[6] === 'X' ||
-            arr[1] == 'X' && arr[4] == 'X' && arr[7] == 'X' ||
-            arr[2] == 'X' && arr[5] == 'X' && arr[8] == 'X' ||
+            arr[1] === 'X' && arr[4] === 'X' && arr[7] === 'X' ||
+            arr[2] === 'X' && arr[5] === 'X' && arr[8] === 'X' ||
             //diagonals
             arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
-            arr[2] == 'X' && arr[4] == 'X' && arr[6] == 'X') {
+            arr[2] === 'X' && arr[4] === 'X' && arr[6] === 'X') {
+           
                 _displayWinner(player1.getName());
-                    //call reset screen & reset array
+                //call reset screen & reset array
+                return true;
+                
+
         } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
-            arr[3] == 'O' && arr[4] == 'O' && arr[5] == 'O' ||
-            arr[6] == 'O' && arr[7] == 'O' && arr[8] == 'O' ||
+            arr[3] === 'O' && arr[4] === 'O' && arr[5] === 'O' ||
+            arr[6] === 'O' && arr[7] === 'O' && arr[8] === 'O' ||
             //down columns
             arr[0] === 'O' && arr[3] === 'O' && arr[6] === 'O' ||
-            arr[1] == 'O' && arr[4] == 'O' && arr[7] == 'O' ||
-            arr[2] == 'O' && arr[5] == 'O' && arr[8] == 'O' ||
+            arr[1] === 'O' && arr[4] === 'O' && arr[7] === 'O' ||
+            arr[2] === 'O' && arr[5] === 'O' && arr[8] === 'O' ||
             //diagonals
             arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
-            arr[2] == 'O' && arr[4] == 'O' && arr[6] == 'O'){
-                    _displayWinner(player2.getName());
-                    //call reset screen & reset array
+            arr[2] === 'O' && arr[4] === 'O' && arr[6] === 'O'){
+
+                _displayWinner(player2.getName());
+                //call reset screen & reset array
+                return true;
+                    
             };
+            return false;
     };
 
-    let _displayWinner = function (player){
-        console.log (`${player} is the winner`);
-        //call method in displayController to display winner on screen
+   
+     let _displayWinner = function (player){ 
+    
+        setTimeout(()=>{
+            winnerDisplay.textContent = `${player} is the winner`;
+        },900);
         
-        setTimeout(_resetGame, 1000);
-
+        setTimeout(_resetGame,800);
     };
-  
+
+
     let _resetGame = function(e){
-        gameBoardArr = Array(9);
-        console.log(gameBoardArr);
-
-        // for (const item of gameBoardArr){ 
-        // };
-
-        //call method in displayController to rerender array
-        // for (let div of nodeList){
-        //     div.textContent = "";
-        // };
-
-        //call method in displayController to add New Game button
-
-        
+        gameBoardArr = Array(9); //empty array
+        for (let div of nodeList){ //empty board from array
+            div.textContent = gameBoardArr[div];
+        };
+        //remove text from screen
+        setTimeout(()=>{
+            winnerDisplay.textContent = '';
+        },1500);
     };
+
+
+
 
     let publicMethod = function(){
         _startGame();
@@ -134,36 +141,34 @@ let gameBoardModule = (function () { //LOGIC & DATA
 let displayController = (function () { //UI AND DOM
     'use strict';
 
-    let _addMarkToBoard = function(e, arr){ // 2. DISPLAY BOARD FROM ARRAY (change this to render from array)
- 
-        if (e.target.textContent ==  ""){
-            e.target.textContent = arr[e.target.dataset.index];
-            // e.target.textContent = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
-
-        };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    let _addMarkToBoard = function(e, arr){ // 2. DISPLAY BOARD FROM ARRAY 
+        e.target.textContent = arr[e.target.dataset.index];
     };
+
+    // let _displayWinner = function (player){ //not able to be called from gamemodule bc private
+    //     console.log (`${player} is the winner`);
+ 
+        
+    //     setTimeout(_resetGame, 1000);
+
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     let startBtn = document.querySelector('.btn_start');
 
@@ -190,6 +195,7 @@ let displayController = (function () { //UI AND DOM
 
     var publicMethod = function(e, arr){
         _addMarkToBoard(e, arr);
+
     };
     
     return {
@@ -246,28 +252,3 @@ let displayController = (function () { //UI AND DOM
     //increment turn counter
     // toggle turn
 
-
-
-//check for winning conditons after 4 turns
-
-
-
-// function clickMeButton() {
-
-    // var choices = ["Rock", "Paper", "Scissors"];
-    // function getComputerChoice(choices) {
-    //     // console.log(choices[Math.floor(Math.random()*choices.length)]);
-    //     return choices[Math.floor(Math.random()*choices.length)];
-    // }
-    
-    // return getComputerChoice(choices);
-    // }
-
-// function clickMeButton(){
-//     getCompChoices();
-// };
-
-// function getCompChoices(){
-//     var choices = ["Rock", "Paper", "Scissors"];
-//     return choices[Math.floor(Math.random()*choices.length)];
-// }
