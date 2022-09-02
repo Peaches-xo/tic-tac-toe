@@ -28,27 +28,36 @@ let gameBoardModule = (function () { //LOGIC & DATA
     let winnerDisplay = document.querySelector('.winnerDisplay');
 
     let _startGame = function() {
-        //on new game start... 
-        //clear array & rerender board (in reset game button)
-        //add event listeners
 
         for (let div of nodeList){
             div.addEventListener('click', (e)=>{
                 
-                _addMarkToArray(e); //1. update array (logic)
-                displayController.publicMethod(e, gameBoardArr); //2. display mark on board from array (ui)
-                let winnerFound = _checkWinner(gameBoardArr); // 3. checks for winner (logic)
-                    if (winnerFound == false){
-                        _toggleTurn();// (logic)
-                    } else {
-                        console.log("winnerFound:" + winnerFound);
+                if(_checkIfEmpty(e)){ //CHECK IF SPACE EMPTY, if so... 
+                    _addMarkToArray(e); //1. update array (logic)
+                    displayController.publicMethod(e, gameBoardArr); //2. display mark on board from array (ui)
+
+                    //check for winner
+                    let winnerFound = _checkWinner(gameBoardArr); // 3. checks for winner (logic)
+                        if (winnerFound == false){
+                            _toggleTurn();// (logic) 
+                        } else {
+                            console.log("winnerFound:" + winnerFound);
                         //call reset array(logic), clear screen(display), display Winner(display);
-                    }
-            }, {
-                once: true
+                    };
+                };
             });
         };
     };
+
+    let _checkIfEmpty = function(e){
+        console.log("gba[e.targ.data.indx]:" + gameBoardArr[e.target.dataset.index]);
+        if (gameBoardArr[e.target.dataset.index] == undefined) {//square is empty 
+            return true;
+        } else { //square is not empty 
+            return false; //do nothing
+        }
+    };
+
 
     let _addMarkToArray = function(e){  //= 1. GET DIV INDEX & ADD MARK TO ARRAY AT THAT INDEX
         gameBoardArr[e.target.dataset.index] = (player1.yourTurn ? player1.getMarker() : player2.getMarker());
@@ -108,19 +117,22 @@ let gameBoardModule = (function () { //LOGIC & DATA
             winnerDisplay.textContent = `${player} is the winner`;
         },900);
         
-        setTimeout(_resetGame,800);
+        setTimeout(resetGame,800);
     };
 
 
-    let _resetGame = function(e){
+    let resetGame = function(e){
         gameBoardArr = Array(9); //empty array
         for (let div of nodeList){ //empty board from array
+            console.log(div.textContent);
             div.textContent = gameBoardArr[div];
         };
         //remove text from screen
         setTimeout(()=>{
             winnerDisplay.textContent = '';
         },1500);
+        _startGame();
+
     };
 
 
@@ -131,7 +143,8 @@ let gameBoardModule = (function () { //LOGIC & DATA
     };
 
     return {
-        publicMethod: publicMethod
+        publicMethod: publicMethod,
+        resetGame: resetGame,
     };
 })(); //<pass in any parameters here
 
@@ -158,18 +171,6 @@ let displayController = (function () { //UI AND DOM
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     let startBtn = document.querySelector('.btn_start');
 
         startBtn.addEventListener('click', (e)=>{
@@ -180,6 +181,7 @@ let displayController = (function () { //UI AND DOM
             } else if (e.target.textContent == 'Reset Game'){
                 console.log('game reset');
                 //call reset game fn
+                gameBoardModule.resetGame();
                 _btnToggle();
             }
                  
