@@ -1,4 +1,5 @@
 // THE ODIN PROJECT - TIC TAC TOE JS FILE
+'use strict';
 
     //Player FACTORIES
     const Player = (name, marker, turn) => {
@@ -21,7 +22,6 @@ let gameModule = (function(){ //controls flow of game
 
 
 let gameBoardModule = (function () { //LOGIC & DATA
-    'use strict';
 
     let gameBoardArr = Array(9);
     let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
@@ -36,14 +36,16 @@ let gameBoardModule = (function () { //LOGIC & DATA
                     _addMarkToArray(e); //1. update array (logic)
                     displayController.publicMethod(e, gameBoardArr); //2. display mark on board from array (ui)
 
-                    //check for winner
-                    let winnerFound = _checkWinner(gameBoardArr); // 3. checks for winner (logic)
-                        if (winnerFound == false){
-                            _toggleTurn();// (logic) 
-                        } else {
-                            console.log("winnerFound:" + winnerFound);
+
+                    if (_checkWinner(gameBoardArr)){
                         //call reset array(logic), clear screen(display), display Winner(display);
+                        console.log(_checkWinner(gameBoardArr));
+                        _checkWinner(gameBoardArr) == player1.getName() ? _displayWinner(player1.getName()) : _displayWinner(player2.getName());
+
+                    } else {
+                        _toggleTurn();// (logic) 
                     };
+                        
                 };
             });
         };
@@ -86,9 +88,12 @@ let gameBoardModule = (function () { //LOGIC & DATA
             arr[0] === 'X' && arr[4] === 'X' && arr[8] === 'X' ||
             arr[2] === 'X' && arr[4] === 'X' && arr[6] === 'X') {
            
-                _displayWinner(player1.getName());
-                //call reset screen & reset array
-                return true;
+
+return player1.getName();
+
+                // _displayWinner(player1.getName());
+                // //call reset screen & reset array
+                // return true;
                 
 
         } else if ( arr[0] === 'O' && arr[1] === 'O' && arr[2] === 'O' ||
@@ -102,9 +107,12 @@ let gameBoardModule = (function () { //LOGIC & DATA
             arr[0] === 'O' && arr[4] === 'O' && arr[8] === 'O' ||
             arr[2] === 'O' && arr[4] === 'O' && arr[6] === 'O'){
 
-                _displayWinner(player2.getName());
-                //call reset screen & reset array
-                return true;
+
+
+return player2.getName();
+                // _displayWinner(player2.getName());
+                // //call reset screen & reset array
+                // return true;
                     
             };
             return false;
@@ -122,9 +130,10 @@ let gameBoardModule = (function () { //LOGIC & DATA
 
 
     let resetGame = function(e){
+        console.log("resetGame Called");
         gameBoardArr = Array(9); //empty array
         for (let div of nodeList){ //empty board from array
-            console.log(div.textContent);
+            console.log("div of nodelist:" + div.textContent);
             div.textContent = gameBoardArr[div];
         };
         //remove text from screen
@@ -132,6 +141,9 @@ let gameBoardModule = (function () { //LOGIC & DATA
             winnerDisplay.textContent = '';
         },1500);
         _startGame();
+
+
+        //reset player turns 
 
     };
 
@@ -177,23 +189,14 @@ let displayController = (function () { //UI AND DOM
 
             if(e.target.textContent == 'Lets Go'){
                 gameBoardModule.publicMethod();
-                _btnToggle();
+                e.target.textContent = 'Reset Game';
             } else if (e.target.textContent == 'Reset Game'){
-                console.log('game reset');
-                //call reset game fn
                 gameBoardModule.resetGame();
-                _btnToggle();
             }
                  
         });
 
-    let _btnToggle = function(){
-        if (startBtn.textContent == 'Lets Go') {
-            startBtn.textContent = 'Reset Game';
-        } else {
-            startBtn.textContent = 'Lets Go';
-        }
-    };
+
 
     var publicMethod = function(e, arr){
         _addMarkToBoard(e, arr);
