@@ -9,36 +9,34 @@ let gameModule = (function(){ //controls flow of game
     let player1Name = document.querySelector('#name1');
     let player2Name = document.querySelector('#name2');
 
-
     // PLAYERS
-    const Player = (name, marker, turn) => {
-        const getName = () => name; 
+    const Player = (nameElement, marker, turn) => {
+        const getName = () => nameElement.value; 
         const getMarker = () => marker;
         const yourTurn = turn; 
         return {getName, getMarker, yourTurn};
     };
 
-
-  
-
-    let getName1FromInput = function(){
-        return player1Name.value.toString;
-    };
-
-    const player1 = Player(getName1FromInput, "X", true);
-    const player2 = Player("boop", "O", false);
+    const player1 = Player(player1Name, "X", true);
+    const player2 = Player(player2Name, "O", false);
 
     // BOARD 
     let gameBoardModule = (function () { //LOGIC & DATA
     
+
+
         let _startGame = function() {
-            // console.log(player1.getName());
-         
             nodeList.forEach(div=>div.addEventListener('click', _gameFlowFunctions));
+
+           
         };
     
         let _gameFlowFunctions = function(e){
             if(_checkIfEmpty(e)){ //1. CHECK IF SPACE EMPTY, if so... 
+
+                 // //make inputs readonly **NEEDS TO BE MOVED** 
+            player1Name.readOnly = true;
+            player2Name.readOnly = true;
 
                 _addMarkToArray(e); //2.. update array (logic)
                 displayController.publicMethod(e, gameBoardArr); //3. display mark on board from array (ui)
@@ -128,6 +126,14 @@ let gameModule = (function(){ //controls flow of game
                 //reset player turns 
                 player1.yourTurn = true;
                 player2.yourTurn = false;
+
+                //clear inputs
+                player1Name.value = "";
+                player2Name.value = "";
+
+                //reset text inputs to accept input
+                player1Name.readOnly = false;
+                player2Name.readOnly = false;
             _startGame();
         }
     
