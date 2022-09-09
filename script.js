@@ -52,12 +52,14 @@ let gameBoardModule = (function () { //LOGIC & DATA
     };
 
     let _checkIfEmpty = function(e){
-        console.log("gba[e.targ.data.indx]:" + gameBoardArr[e.target.dataset.index]);
-        if (gameBoardArr[e.target.dataset.index] == undefined) {//square is empty 
-            return true;
-        } else { //square is not empty 
-            return false; //do nothing
-        }
+        // if (gameBoardArr[e.target.dataset.index] == undefined) {//square is empty 
+        //     return true;
+        // } else { //square is not empty 
+        //     return false; //do nothing
+        // }
+
+       return  (gameBoardArr[e.target.dataset.index] == undefined) ? true : false;
+
     };
 
 
@@ -143,7 +145,8 @@ return player2.getName();
         _startGame();
 
 
-        //reset player turns 
+        //reset player turns maybe
+
 
     };
 
@@ -177,8 +180,6 @@ let displayController = (function () { //UI AND DOM
     //     setTimeout(_resetGame, 1000);
 
     // };
-
-
 
 
 
