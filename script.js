@@ -22,19 +22,15 @@ let gameModule = (function(){ //controls flow of game
 
     // BOARD 
     let gameBoardModule = (function () { //LOGIC & DATA
-    
-
 
         let _startGame = function() {
             nodeList.forEach(div=>div.addEventListener('click', _gameFlowFunctions));
-
-           
         };
     
         let _gameFlowFunctions = function(e){
             if(_checkIfEmpty(e)){ //1. CHECK IF SPACE EMPTY, if so... 
 
-                 // //make inputs readonly **NEEDS TO BE MOVED** 
+            //make inputs readonly 
             player1Name.readOnly = true;
             player2Name.readOnly = true;
 
@@ -147,7 +143,7 @@ let gameModule = (function(){ //controls flow of game
             resetGame: resetGame,
     
         };
-    })(); //<pass in any parameters here
+    })(); 
 
   
     // DISPLAY CONTROLLER *****************************************************
@@ -155,7 +151,6 @@ let gameModule = (function(){ //controls flow of game
         let _addMarkToBoard = function(e, arr){ // 3. DISPLAY BOARD FROM ARRAY 
             e.target.textContent = arr[e.target.dataset.index];
         };
-
 
         let startBtn = document.querySelector('.btn_start');
             startBtn.addEventListener('click', (e)=>{
@@ -165,7 +160,6 @@ let gameModule = (function(){ //controls flow of game
                 } else if (e.target.textContent == 'Reset Game'){
                     gameBoardModule.resetGame();
                 }
-                    
             });
 
 
@@ -176,7 +170,6 @@ let gameModule = (function(){ //controls flow of game
         };
 
         let clearBoard = function(){
-
             setTimeout(()=>{
             nodeList.forEach(div=>div.textContent = gameBoardArr[div]); //render board from array
             }, 500);
