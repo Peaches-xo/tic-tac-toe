@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DynaPuff&family=Homemade+Apple&family=Open+Sans&family=Permanent+Marker&family=Silkscreen&family=Square+Peg&display=swap');
-@import url("https://fonts.googleapis.com/css?family=Modak");
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Modak');
 
 :root {
-    --color-background: #F5CAC3;
-    --color-background-fade: #F5CAC300;
-    --color-browser: #84A59D;
-    --color-browser-alt: #C4D4D0;
-    --color-page: #F7EDE2;
-    --color-element: #C6CDD2;
-    --color-footer: #C794BB;
+    --col-background: #F5CAC3;
+    --col-background-fade: rgba(242, 237, 238, 0.3);
+    --col-lgrey-outline: rgba(242, 237, 238, 0.5);
 }
 
-/* ********************************************* */
 *, *::before, *::after{
     margin: 0;
     padding: 0;
@@ -22,7 +17,7 @@ html{
     min-height: 100vh;
     font-size: 1rem;
     text-align: center;
-    background-color: var(--color-background);
+    background-color: var(--col-background);
     background-image: url("images/neon-green-gum-gradient.png");
     background-size: cover;
 }
@@ -34,7 +29,6 @@ html{
     font-size: 8rem;
     line-height: 84%;
     font-family: Modak;
-    
     padding-left: 7px;
     background-clip: text;
     -webkit-background-clip: text;
@@ -53,8 +47,6 @@ html{
 
 .gameBoard{
     font-family: 'Permanent Marker', cursive;
-    /* font-family: 'Homemade Apple', cursive; */
-    /* font-family: 'Square Peg', cursive; */
     font-size: 6rem;
     color: whitesmoke;
     text-shadow:7px 7px 10px #c794bbbe;
@@ -62,8 +54,8 @@ html{
     height: 500px;
     margin: 0 auto;
     border-radius: 20px;
-    background-color:  rgba(242, 237, 238, 0.3);
-    outline: solid 0.5px  rgba(242, 237, 238, 0.5);
+    background-color:   var(--col-background-fade);
+    outline: solid 0.5px var(--col-lgrey-outline);
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
@@ -71,24 +63,19 @@ html{
 
 .gameBoard>div{
     border-radius: 20px;
-    outline: dotted 1px  rgba(242, 237, 238, 0.5);
+    outline: dotted 1px  var(--col-lgrey-outline);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 footer a{
-    /* font-family: 'DynaPuff', cursive; */
     font-family: 'Silkscreen', cursive;
     text-decoration: none;
     text-shadow: none;
     font-size: 2rem;
     color: rgba(0,0,0,.1);
-    background: url("images/gradient-bgs/neon-distilled-moss-gradient.png");
-    /* background: url("images/gradient-bgs/neon-envious-pastel-gradient.png"); */
-    /* background: url("images/gradient-bgs/neon-reef-refractions-gradient.png"); */
-    /* background: url("images/gradient-bgs/neon-cactus-water-gradient.png"); */
-    /* dont forget to move gradients folder out of image folder & leave images I want */
+    background: url("images/neon-distilled-moss-gradient.png");
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     display: flex;
@@ -112,9 +99,7 @@ footer a{
 }
 
 .names_p1, .names_p2{
-     background: url("images/gradient-bgs/neon-reef-refractions-gradient.png");
-
-    /* dont forget to move gradients folder out of image folder & leave images I want */
+     background: url("images/neon-reef-refractions-gradient.png");
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
@@ -128,10 +113,10 @@ footer a{
     width: auto;
     font-family: 'Permanent Marker', cursive;
     font-size: 1.5rem;
-    outline: dotted 1px  rgba(242, 237, 238, 0.5);
+    outline: dotted 1px  var(--col-lgrey-outline);
     background-color: rgb(255, 192, 203, 0.5);
     box-shadow: 0px 0px 10px pink;
-    background: url("images/gradient-bgs/neon-envious-pastel-gradient.png");
+    background: url("images/neon-envious-pastel-gradient.png");
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
 }
@@ -144,7 +129,7 @@ footer a{
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
-    background: url("images/gradient-bgs/colourful-neon-boneyard-gradient.png"); 
+    background: url("images/colourful-neon-boneyard-gradient.png"); 
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     filter: drop-shadow(0px 0px 6px #FFFFFF);
@@ -172,7 +157,6 @@ input[type="text"]{
     border: none;
     width: 200px;
     height: 25px;
-    /* outline: 1px dotted rgba(179, 176, 176, 0.318); */
     border-radius: 20px;
     padding: 10px;
     margin-bottom: 5px;
