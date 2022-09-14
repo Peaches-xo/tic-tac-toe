@@ -1,7 +1,7 @@
 // THE ODIN PROJECT - TIC TAC TOE JS FILE
 'use strict';
 let gameModule = (function(){ //controls flow of game
-    let gameBoardArr = Array(9);
+    let gameBoardArr = Array(9).fill(null);
     let nodeList = document.querySelectorAll('div[data-index]'); //node list of all divs
     let winnerDisplay = document.querySelector('.winnerDisplay');
     let player1Display = document.querySelector('.names_p1');
@@ -37,11 +37,22 @@ let gameModule = (function(){ //controls flow of game
                 _addMarkToArray(e); //2.. update array (logic)
                 displayController.publicMethod(e, gameBoardArr); //3. display mark on board from array (ui)
     
-                if (_checkWinner(gameBoardArr)){ //4. check winner (will return name(truthy) or false)
+                if (_checkWinner(gameBoardArr)){ //4. check winner (will return name(truthy), "tie" or false)
                     removeListeners();
 
-                    //5. display the winner on screen
-                    _checkWinner(gameBoardArr) == player1.getName() ? displayController.displayWinner(player1.getName()) : displayController.displayWinner(player2.getName());
+                    switch(_checkWinner(gameBoardArr)) {
+                        case player1.getName():
+                            displayController.displayWinner(player1.getName());
+                            break;
+                        case player2.getName():
+                            displayController.displayWinner(player2.getName());
+                            break;
+                        case "tie":
+                            displayController.displayTie();
+                    }
+
+                    //5. display the winner on screen (maybe change to switch to include tie option)
+                    // _checkWinner(gameBoardArr) == player1.getName() ? displayController.displayWinner(player1.getName()) : displayController.displayWinner(player2.getName());
 
                     //clear array
                     _clearArray();
@@ -90,7 +101,11 @@ let gameModule = (function(){ //controls flow of game
     
                 return player2.getName();
 
-                };
+            //if entire array is full of chars (not null) with no winner, return tie
+             } else if (arr.every(div => (div !== null)))
+             { 
+                 return "tie";
+            } 
                 return false;
         };
     
@@ -107,7 +122,7 @@ let gameModule = (function(){ //controls flow of game
         };
 
         let _clearArray = function(){
-            gameBoardArr = Array(9); 
+            gameBoardArr = Array(9).fill(null); 
         }
        
         let removeListeners = function(){
@@ -169,6 +184,12 @@ let gameModule = (function(){ //controls flow of game
                 },1000);
         };
 
+        let displayTie = function(){
+            setTimeout(()=>{
+                winnerDisplay.textContent = `It's a TIE`;
+            },1000);
+        };
+
         let clearBoard = function(){
             setTimeout(()=>{
             nodeList.forEach(div=>div.textContent = gameBoardArr[div]); //render board from array
@@ -193,6 +214,7 @@ let gameModule = (function(){ //controls flow of game
             publicMethod: publicMethod,
             getScaled: getScaled,
             displayWinner: displayWinner,
+            displayTie: displayTie,
             clearBoard: clearBoard,
         };
     })();

@@ -37,3 +37,18 @@ After adding the ability for the players to input their names, I was stuck on ho
 ** STILL TO DO
      - logic for tie. 
      - AI?
+
+     PSEUDO/ NOTES
+
+What am I trying to do currently:
+
+ - move name input code into own functions 
+ - check for tie. cant use arr.length. Maybe set contents of array to null or undefined
+ 
+
+
+
+
+
+Additional feature:
+    - scrolling bar saying 'please enter your name' 
