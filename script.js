@@ -9,28 +9,51 @@ let gameModule = (function(){ //controls flow of game
     let player1Name = document.querySelector('#name1');
     let player2Name = document.querySelector('#name2');
 
-    // PLAYERS
-    const Player = (nameElement, marker, turn) => {
-        const getName = () => nameElement.value; 
+
+
+    const Player = (nameElement, marker, turn, defaultname) => {
+        const getName = () => {
+            if (nameElement.value !== ""){ 
+                return nameElement.value;
+            } return defaultname;
+         } 
         const getMarker = () => marker;
         const yourTurn = turn; 
         return {getName, getMarker, yourTurn};
     };
 
-    const player1 = Player(player1Name, "X", true);
-    const player2 = Player(player2Name, "O", false);
+
+    const player1 = Player(player1Name, "X", true, "Killer Mike");
+    const player2 = Player(player2Name, "O", false, "El-P");
+
+
 
     // BOARD 
     let gameBoardModule = (function () { //LOGIC & DATA
 
         let _startGame = function() {
+            // if  (player1Name.value == undefined) {
+            //     player1Name.defaultValue = "Killer Mike";
+            // };
+
+            // if (player2Name.value == undefined){
+            //     player2Name.defaultValue = "El-P";
+            // };
+
+            displayController.showPlayerNames();
+
             nodeList.forEach(div=>div.addEventListener('click', _gameFlowFunctions));
+      
         };
     
         let _gameFlowFunctions = function(e){
+           
+
+
             if(_checkIfEmpty(e)){ //1. CHECK IF SPACE EMPTY, if so... 
 
             //make inputs readonly 
+          
             player1Name.readOnly = true;
             player2Name.readOnly = true;
 
@@ -49,11 +72,10 @@ let gameModule = (function(){ //controls flow of game
                             break;
                         case "tie":
                             displayController.displayTie();
+                            break;
                     }
 
-                    //5. display the winner on screen (maybe change to switch to include tie option)
-                    // _checkWinner(gameBoardArr) == player1.getName() ? displayController.displayWinner(player1.getName()) : displayController.displayWinner(player2.getName());
-
+                    
                     //clear array
                     _clearArray();
                     displayController.clearBoard();
@@ -168,15 +190,26 @@ let gameModule = (function(){ //controls flow of game
         };
 
         let startBtn = document.querySelector('.btn_start');
+
             startBtn.addEventListener('click', (e)=>{
                 if(e.target.textContent == 'Lets Go'){
+
+
+
                     gameBoardModule.publicMethod();
                     e.target.textContent = 'Reset Game';
                 } else if (e.target.textContent == 'Reset Game'){
                     gameBoardModule.resetGame();
                 }
             });
+        let showPlayerNames = function() {
+      
+        player1Name.value= player1.getName();
+        player2Name.value = player2.getName();
+        
 
+  
+        };
 
         let displayWinner = function (player){ //5. WINNER DISPLAYED ON SCREEN 
                 setTimeout(()=>{
@@ -216,6 +249,7 @@ let gameModule = (function(){ //controls flow of game
             displayWinner: displayWinner,
             displayTie: displayTie,
             clearBoard: clearBoard,
+            showPlayerNames: showPlayerNames,
         };
     })();
 

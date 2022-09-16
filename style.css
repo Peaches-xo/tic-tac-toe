@@ -69,6 +69,21 @@ html{
     align-items: center;
 }
 
+.banner{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.7rem;
+    width: 100vw;
+    height: 35px;
+    position: relative;
+    top: 10px;
+    display:flex;
+    justify-content: center;
+    color: pink;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+}
+
 footer a{
     font-family: 'Silkscreen', cursive;
     text-decoration: none;
@@ -167,4 +182,22 @@ input[type="text"]{
 input[type="text"]:focus-visible{
     outline: none;
     caret-color: pink;
+}
+
+.moving_text:hover{
+    animation-play-state: paused;
+}
+
+@keyframes marquee{
+    0%{transform: translateX(100%);}
+    100%{transform: translateX(-100%);}
+}
+
+/* media query to enable animation for only those who want it */
+@media (prefers-reduced-motion: no-preference) {
+    .moving_text{
+        display: block;
+        width: 100%;
+        animation: marquee 30s linear infinite;
+    }
 }

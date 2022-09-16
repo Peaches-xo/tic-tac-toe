@@ -43,11 +43,19 @@ After adding the ability for the players to input their names, I was stuck on ho
 What am I trying to do currently:
 
  - move name input code into own functions 
- - check for tie. cant use arr.length. Maybe set contents of array to null or undefined
+
+ - make name fields required before button works OR
+ - set default names/values for inputs if not provided INSIDE LETS GO CLICK EVENT CHECK FOR VALUES
+
  
 
 
-
+Because a read-only field cannot have a value, required does not have any effect on inputs with the readonly attribute also specified.
+ 
+ So can do EITHER
+     - remove required so readonly works
+          - make button not clickable until names have been entered (validation on click)
+     - remove readonly and find another way to set text to not be able to be edited in game
 
 
 Additional feature:
